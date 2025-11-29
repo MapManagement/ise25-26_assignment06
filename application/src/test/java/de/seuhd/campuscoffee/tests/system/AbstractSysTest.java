@@ -1,6 +1,7 @@
 package de.seuhd.campuscoffee.tests.system;
 
 import de.seuhd.campuscoffee.api.mapper.PosDtoMapper;
+import de.seuhd.campuscoffee.api.mapper.UserDtoMapper;
 import de.seuhd.campuscoffee.domain.ports.PosService;
 import de.seuhd.campuscoffee.domain.ports.UserService;
 import io.restassured.RestAssured;
@@ -21,7 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Abstract base class for system tests.
- * Sets up the Spring Boot test context, manages the PostgreSQL testcontainer, and configures REST Assured.
+ * Sets up the Spring Boot test context, manages the PostgreSQL testcontainer,
+ * and configures REST Assured.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AbstractSysTest {
@@ -47,9 +49,8 @@ public abstract class AbstractSysTest {
     @Autowired
     protected PosDtoMapper posDtoMapper;
 
-    //TODO: Uncomment after user DTO mapper is implemented
-    //@Autowired
-    //protected UserDtoMapper userDtoMapper;
+    @Autowired
+    protected UserDtoMapper userDtoMapper;
 
     @LocalServerPort
     private Integer port;
@@ -57,8 +58,7 @@ public abstract class AbstractSysTest {
     @BeforeEach
     void beforeEach() {
         posService.clear();
-        //TODO: Uncomment after user service is implemented
-        //userService.clear();
+        userService.clear();
         RestAssured.baseURI = "http://localhost:" + port;
     }
 
@@ -83,7 +83,8 @@ public abstract class AbstractSysTest {
     }
 
     /**
-     * Asserts that two objects are equal, ignoring timestamp fields (createdAt, updatedAt).
+     * Asserts that two objects are equal, ignoring timestamp fields (createdAt,
+     * updatedAt).
      *
      * @param actual   the actual object
      * @param expected the expected object
@@ -105,7 +106,8 @@ public abstract class AbstractSysTest {
     }
 
     /**
-     * Asserts that two collections contain the same elements (in any order), ignoring specified fields.
+     * Asserts that two collections contain the same elements (in any order),
+     * ignoring specified fields.
      *
      * @param actual         the actual collection
      * @param expected       the expected collection
@@ -119,7 +121,8 @@ public abstract class AbstractSysTest {
     }
 
     /**
-     * Asserts that two collections contain the same elements (in any order), ignoring timestamp fields for
+     * Asserts that two collections contain the same elements (in any order),
+     * ignoring timestamp fields for
      * each element comparison.
      *
      * @param actual   the actual collection
