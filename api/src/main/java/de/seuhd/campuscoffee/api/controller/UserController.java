@@ -58,7 +58,7 @@ public class UserController {
     })
     @GetMapping("/filter")
     public ResponseEntity<UserDto> filter(
-            @RequestParam("loginName") String loginName) {
+            @RequestParam("login_name") String loginName) {
         return ResponseEntity.ok(
                 userDtoMapper.fromDomain(userService.getByLoginName(loginName)));
     }
